@@ -14,6 +14,78 @@ class Player:
 	def displayRoundTotal(self):
 		print("Player %s's round total is: %d" % (self.playerNumber, self.roundTotal))
 
+def one():
+	print(" _______________")
+	print("|               |")
+	print("|               |")
+	print("|               |")
+	print("|       O       |")
+	print("|               |")
+	print("|               |")
+	print("|_______________|")
+	
+def two():
+	print(" _______________")
+	print("|               |")
+	print("| O             |")
+	print("|               |")
+	print("|               |")
+	print("|               |")
+	print("|             O |")
+	print("|_______________|")
+	
+def three():
+	print(" _______________")
+	print("|               |")
+	print("| O             |")
+	print("|               |")
+	print("|       O       |")
+	print("|               |")
+	print("|             O |")
+	print("|_______________|")
+
+def four():
+	print(" _______________")
+	print("|               |")
+	print("| O           O |")
+	print("|               |")
+	print("|               |")
+	print("|               |")
+	print("| O           O |")
+	print("|_______________|")
+
+def five():
+	print(" _______________")
+	print("|               |")
+	print("| O           O |")
+	print("|               |")
+	print("|       O       |")
+	print("|               |")
+	print("| O           O |")
+	print("|_______________|")
+
+def six():
+	print(" _______________")
+	print("|               |")
+	print("| O           O |")
+	print("|               |")
+	print("| O           O |")
+	print("|               |")
+	print("| O           O |")
+	print("|_______________|")
+	
+def showDice(arg):
+	switcher = {
+		1: one,
+		2: two,
+		3: three,
+		4: four,
+		5: five,
+		6: six
+	}
+	
+	func = switcher.get(arg, lambda: "Invalid")
+	return func()
 
 def roll(sides):
 	num_rolled = random.randint(1,sides)
@@ -43,11 +115,13 @@ def playerTurn(player):
 					playerNum = 2
 				else:
 					playerNum = 1
+				showDice(num_rolled)
 				print("Player %s has rolled a %s. It is now Player %s's turn.\n" % (player.playerNumber, num_rolled, playerNum))
 				rolling = False
 			else:
 				player.roundTotal += num_rolled
-				print("You rolled a", num_rolled)
+				showDice(num_rolled)
+				print("You rolled a %s" % (num_rolled))
 				print("Round total:", player.roundTotal)
 		else:
 			player.grandTotal += player.roundTotal
@@ -65,7 +139,7 @@ def playerTurn(player):
 				return gameOver
 				
 			else:
-				print("\n\nPlayer %s wins!\n\n" % (playerNum))
+				print("\n\nPlayer %s wins with a score of %s!\n\n" % (playerNum, player.grandTotal))
 				gameOver = True
 				return gameOver
 	return gameOver
